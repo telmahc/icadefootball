@@ -1,0 +1,5 @@
+{% if match.lineups[0].team.id == teamId %}
+	{{ match.lineups[0].coach.name }}
+{% else %}
+	{{ match.lineups[1].coach.name }}
+{% endif %}

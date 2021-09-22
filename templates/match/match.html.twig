@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<div class="content">
+		{% if match is defined %}
+
+			{% set homeId = match.teams.home.id %}
+			{% set awayId = match.teams.away.id %}
+			<div class="match-details">
+				<div class="match-details__teams">
+					<h2>Summary</h2>
+					<div class="teams">
+						<div class="match-details__team match-details__team--home" data-href="{{ path('teamMatch', {"teamId":homeId}) }}">
+							{{ include('./match/includes/match.team.html.twig', {logo: match.teams.home.logo, name: match.teams.home.name, score: match.score.fulltime.home}) }}
+						</div>
+						<div>
+							<h2>-</h2>
+						</div>
+						<div class="match-details__team match-details__team--away" data-href="{{ path('teamMatch', {"teamId":awayId}) }}">
+							{{ include('./match/includes/match.team.html.twig', {logo: match.teams.away.logo, name: match.teams.away.name, score: match.score.fulltime.away}) }}
+						</div>
+					</div>
+				</div>
+
+				{% if match.fixture.status.elapsed is not null %}
+
+					<div class="match-details__events">
+						<h2>Highlights</h2>
+						<div class="events">
+							<div class="events-home">
+								{{ include('./match/includes/match.event.html.twig', {teamId: homeId}) }}
+							</div>
+							<div class="events-type">
+								{% for event in match.events %}
+									{% if event.type == 'Card' %}
+										<div>
+											{% if event.detail == 'Yellow Card' %}
+												<img src="{{ asset('/images/yellow-card-right.svg') }}"/>
+											{% elseif event.detail == 'Red Card' %}
+												<img src="{{ asset('/images/red-card-right.svg') }}"/>
+											{% endif %}
+										</div>
+									{% elseif event.type == 'Goal' %}
+										<div>
+											<img src="{{ asset('/images/soccer-ball-retina.png') }}"/>
+										</div>
+									{% endif %}
+								{% endfor %}
+							</div>
+							<div class="events-away">
+								{{ include('./match/includes/match.event.html.twig', {teamId: awayId}) }}
+							</div>
+						</div>
+					</div>
+
+					<div class="match-details__players">
+						<h2>Starting XI</h2>
+						<div class="soccerfield">
+							{{ include('./match/includes/match.startingxi.html.twig') }}
+						</div>
+
+					</div>
+
+					<div class="match-details__substitutes">
+						<h2>Substitutes</h2>
+						<div class="substitutes">
+							<div class="substitutes__home">
+								{{ include('./match/includes/match.substitutes.html.twig', {teamId: homeId}) }}
+							</div>
+							<div class="substitutes__sep"></div>
+							<div class="substitutes__away">
+								{{ include('./match/includes/match.substitutes.html.twig', {teamId: awayId}) }}
+							</div>
+						</div>
+					</div>
+
+					<div class="match-details__others">
+						<h2>Other information</h2>
+						<div class="others">
+							<div class="others-infos others-infos__home">
+								<div class="others-infos__team-coach">
+									{{ include('./match/includes/match.coach.html.twig', {teamId: homeId}) }}
+								</div>
+								<div class="others-infos__team-formation">
+									{{ include('./match/includes/match.formation.html.twig', {teamId: homeId}) }}
+								</div>
+							</div>
+							<div class="others-infos others-infos__sep">
+								<div class="others-infos__team-coach upper">
+									Coach
+								</div>
+								<div class="others-infos__team-formation upper">
+									Formation
+								</div>
+							</div>
+							<div class="others-infos others-infos__away">
+								<div class="others-infos__team-coach">
+									{{ include('./match/includes/match.coach.html.twig', {teamId: awayId}) }}
+								</div>
+								<div class="others-infos__team-formation">
+									{{ include('./match/includes/match.formation.html.twig', {teamId: awayId}) }}
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="match-details__last">
+						<h2>Team's last games</h2>
+						<div class="last">
+							<div class="last-games last-games__home">
+								<span>{{ match.teams.home.name }}</span>
+								{{ include('./match/includes/match.list.html.twig', {matches: homeLastMatches}) }}
+							</div>
+							<div class="last-games last-games__sep"></div>
+							<div class="last-games last-games__away">
+								<span>{{ match.teams.away.name }}</span>
+								{{ include('./match/includes/match.list.html.twig', {matches: awayLastMatches}) }}
+							</div>
+						</div>
+					</div>
+				{% else %}
+					<h2>
+						{{ match.fixture.status.long }}
+					</h2>
+				{% endif %}
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

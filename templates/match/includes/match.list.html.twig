@@ -1,0 +1,22 @@
+{% if matches is defined %}
+	{% for match in matches %}
+		<div class="match" data-href="{{ path('match', {"matchId": match.fixture.id}) }}">
+			<div class="match__teams">
+				<div class="match__team">
+					<img src="{{ match.teams.home.logo }}"/>{{ match.teams.home.name }}<span>{{ match.score.fulltime.home}}</span>
+				</div>
+				<div class="match__team">
+					<img src="{{ match.teams.away.logo }}"/>{{ match.teams.away.name }}<span>{{ match.score.fulltime.away}}</span>
+				</div>
+			</div>
+			<div class="match__infos">
+				<div class="match__status">{{ match.fixture.status.short|matchStatusFR }}</div>
+				{% if match.fixture.status.short == 'TBD' %}
+					<div class="match__date">{{ match.fixture.timestamp|matchDateFR('false')}}</div>
+				{% else %}
+					<div class="match__date">{{ match.fixture.timestamp|matchDateFR }}</div>
+				{% endif %}
+			</div>
+		</div>
+	{% endfor %}
+{% endif %}

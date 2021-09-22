@@ -1,0 +1,53 @@
+{% if match.lineups[0].team.id == homeId %}
+	{% set xi = match.lineups[0].startXI %}
+	{% set formation = match.lineups[0].formation %}
+{% else %}
+	{% set xi = match.lineups[1].startXI %}
+	{% set formation = match.lineups[1].formation %}
+{% endif %}
+{% set nbLine = formation|countLine %}
+<div class="soccerfield__home">
+	<div class="soccerfield__home--infos"><img src="{{ match.teams.home.logo}}"/>{{ match.teams.home.name}}&nbsp;{{ formation }}</div>
+	<div class="soccerfield__home--lines">
+		{% for i in 1..nbLine+ 1  %}
+			<div class="soccerfield__home--line" style="height: {{ 200 - (25 * (nbLine + 1) ) }}px">
+				{% set regex = '{' ~ i ~ ':.+}'  %}
+				{% for player in xi %}
+					{% if player.player.grid matches regex  %}
+						<div class="soccerfield__home--player">
+							<div class="soccerfield__home--player-number">{{ player.player.number }}</div>
+							<div class="soccerfield__home--player-name">{{ player.player.name }}</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
+{% if match.lineups[0].team.id == awayId %}
+	{% set xi = match.lineups[0].startXI %}
+	{% set formation = match.lineups[0].formation %}
+{% else %}
+	{% set xi = match.lineups[1].startXI %}
+	{% set formation = match.lineups[1].formation %}
+{% endif %}
+{% set nbLine = formation|countLine %}
+<div class="soccerfield__away">
+	<div class="soccerfield__away--infos"><img src="{{ match.teams.away.logo}}"/>{{ match.teams.away.name}}&nbsp;{{ formation }}</div>
+	<div class="soccerfield__away--lines">
+		{% for i in 1..nbLine+ 1  %}
+			<div class="soccerfield__away--line" style="height: {{ 200 - (25 * (nbLine + 1) ) }}px">
+				{% set regex = '{' ~ i ~ ':.+}'  %}
+				{% for player in xi %}
+					{% if player.player.grid matches regex  %}
+						<div class="soccerfield__away--player">
+							<div class="soccerfield__away--player-number">{{ player.player.number }}</div>
+							<div class="soccerfield__away--player-name">{{ player.player.name }}</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		{% endfor %}
+	</div>
+</div>

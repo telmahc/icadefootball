@@ -1,0 +1,14 @@
+{% if match.players[0].team.id == teamId %}
+	{% set players = match.players[0].players %}
+{% else %}
+	{% set players = match.players[1].players %}
+{% endif %}
+<ul>
+	{% for player in players %}
+		{% if player.statistics[0].games.substitute == true %}
+			<li>{{ player.statistics[0].games.number }}
+				{{ player.player.name }}
+			</li>
+		{% endif %}
+	{% endfor %}
+</ul>

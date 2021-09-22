@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<div>
+		welcome to Icade Football
+	</div>
+    <div>
+    Current request : {{ status.requests.current }}<br/>
+     Daily limit : {{ status.requests.limit_day }}
+    </div>
+{% endblock %}

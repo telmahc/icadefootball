@@ -1,0 +1,323 @@
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  background-color: white;
+}
+
+.upper {
+  text-transform: uppercase;
+}
+
+.navbar {
+  form {
+    display: flex;
+    position: relative;
+  }
+  #navbarSupportedContent {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+  }
+  .navbar-nav {
+      flex-direction: row;
+      gap: 20px;
+  }
+  .ui-autocomplete-input {
+      max-height: 40px;;
+  }
+}
+
+.ui-helper-hidden-accessible { 
+    display:none;
+ }
+
+.ui-autocomplete {
+  background-color: white;
+  list-style: none;
+  max-width: 200px;
+  padding-left: 0;
+  position: absolute;
+  left: 0;
+  top: 40px;
+  border: 0 solid silver;
+    border-width: 0 0 1px 1px;
+  li {
+    border: 0 solid silver;
+    border-width: 1px 1px 0 0;
+    padding:.5em;
+  }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .matches-list,
+  .last {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 700px;
+    margin: -10px;
+    .match {
+      border: 1px solid black;
+      border-radius: 5px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      height: 100px;
+      width: 330px;
+      padding: 10px;
+      margin: 10px;
+      cursor: pointer;
+      &__teams {
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+      }
+      &__team {
+        position: relative;
+        span {
+          position: absolute;
+          right: 0;
+        }
+      }
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  .soccerfield {
+    $infosHeight: 30px;
+    background-image: url("../../public/images/Football_field.svg");
+    background-size: auto;
+    height: 1060px;
+    width: 700px;
+    position: relative;
+    &__home,
+    &__away {
+      height: 50%;
+      img {
+        width: 24px;
+        height: 24px;
+        margin: 0 5px;
+      }
+      &--lines {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+      }
+      &--line {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+      &--player {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        z-index: 2;
+        &-number {
+          border-radius: 50px;
+          border: 2px solid white;
+          width: 50px;
+          height: 50px;
+          display: flex;
+          justify-content: center;
+          align-content: center;
+          padding-top: 12px;
+          color: white;
+          z-index: 2;
+          font-weight: bold;
+          text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+          box-shadow: 1px 1px 2px black;
+        }
+        &-name {
+          color: white;
+          font-weight: bold;
+          text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        }
+      }
+      &--infos {
+        background-color: hsla(0, 0%, 0%, 0.5);
+        opacity: 0.5;
+        height: $infosHeight;
+        width: 100%;
+        position: absolute;
+        color: white;
+      }
+    }
+    &__home {
+      &--lines {
+        padding-top: $infosHeight;
+      }
+      &--infos {
+        top: 0;
+        left: 0;
+      }
+    }
+    &__away {
+      &--lines {
+        flex-direction: column-reverse;
+        padding-top: 50px;
+      }
+      &--infos {
+        bottom: 0;
+        left: 0;
+      }
+    }
+  }
+
+  .match-details {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    &__teams {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      width: 50%;
+      flex-direction: column;
+      .teams {
+        width: 100%;
+        display: flex;
+        align-items: center;
+      }
+    }
+    &__team {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      cursor: pointer;
+      &--away {
+        flex-direction: row-reverse;
+      }
+      > div:first-of-type {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+      img {
+        width: 48px;
+        height: 48px;
+      }
+    }
+    &__players {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      border-bottom: 1px solid black;
+    }
+    &__substitutes {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      border-bottom: 1px solid black;
+      .substitutes {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        &__home {
+          text-align: left;
+          width: 100%;
+        }
+        &__away {
+          text-align: right;
+          width: 100%;
+        }
+        ul {
+          list-style-type: none;
+        }
+      }
+    }
+    &__events {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      border: 1px solid black;
+      justify-content: center;
+      flex-direction: column;
+      .events {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        &-home,
+        &-type,
+        &-away {
+          > div {
+            height: 24px;
+          }
+        }
+        &-type {
+          img {
+            width: 24px;
+            height: 24px;
+          }
+        }
+        &-home {
+          width: 100%;
+          text-align: left;
+        }
+        &-away {
+          width: 100%;
+          text-align: right;
+        }
+      }
+    }
+    &__others {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      .others {
+        display: flex;
+        width: 50%;
+        &-infos {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          &__home {
+            text-align: left;
+          }
+          &__away {
+            text-align: right;
+          }
+        }
+      }
+    }
+    &__last {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      .last {
+        display: flex;
+        width: 50%;
+         @media screen and (min-width: 1400px) {
+             &-games {
+                 &__away {
+                     > span {
+                         display: block;
+                         text-align: right;
+                     }
+                 }
+             }
+         }
+      }
+    }
+  }
+}

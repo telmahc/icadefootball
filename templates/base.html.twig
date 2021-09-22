@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+	</head>
+	<body>
+		{% block navbar %}
+			<nav class="navbar navbar-light bg-light">
+				<div id="navbarSupportedContent">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('homepage') }}">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('matches') }}">Matches</a>
+						</li>
+
+					</ul>
+					<form class="form-inline my-2 my-lg-0 search">
+						<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" data-source="{{ path('searchTeam') }}">
+            <div class="searchResults"></div>
+					</form>
+				</div>
+			</nav>
+		{% endblock %}
+		{% block body %}{% endblock %}
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</body>
+</html>

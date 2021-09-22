@@ -1,0 +1,17 @@
+{% for event in match.events %}
+	{% if event.team.id == teamId %}
+		{% if event.type == 'Card' %}
+			<div>{{ event.player.name }}
+				{{ event.time.elapsed }}'
+			</div>
+		{% elseif event.type == 'Goal' %}
+			<div>{{ event.player.name }}
+				{% if event.detail == 'Penalty' %}(P)
+				{% endif %}
+				{{ event.time.elapsed }}'
+			</div>
+		{% endif %}
+	{% elseif event.team.id != teamId and (event.type == 'Card' or event.type == 'Goal') %}
+		<div>&nbsp;</div>
+	{% endif %}
+{% endfor %}
